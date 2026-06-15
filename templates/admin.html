@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="painel-grande">
+
+    <h1>Dashboard Administrativo</h1>
+
+    {% if status %}
+        <p class="liberado">Acesso do colaborador: Liberado</p>
+    {% else %}
+        <p class="bloqueado">Acesso do colaborador: Bloqueado</p>
+    {% endif %}
+
+    <div class="cards-dashboard">
+        <div class="mini-card">Colaboradores<br><strong>{{ total_colaboradores }}</strong></div>
+        <div class="mini-card">EPI cadastrados<br><strong>{{ total_epis }}</strong></div>
+        <div class="mini-card">Pedidos de EPI<br><strong>{{ pedidos_epi }}</strong></div>
+        <div class="mini-card">Almoxarifado<br><strong>{{ pedidos_almox }}</strong></div>
+        <div class="mini-card">Pendentes<br><strong>{{ pendentes }}</strong></div>
+    </div>
+
+    <a href="/liberar_colaborador"><button>Liberar Acesso</button></a>
+    <a href="/bloquear_colaborador"><button class="btn-bloquear">Bloquear Acesso</button></a>
+    <a href="/colaboradores"><button>Cadastro de Colaboradores</button></a>
+    <a href="/epis"><button>Cadastro de EPI</button></a>
+    <a href="/pedidos"><button>Consultar Pedidos</button></a>
+    <a href="/exportar_excel"><button>Exportar Relatório Excel</button></a>
+
+    <br><br>
+
+    <a href="/sair">Sair</a>
+
+</div>
+
+</body>
+</html>

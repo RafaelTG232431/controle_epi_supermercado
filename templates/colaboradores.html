@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Colaboradores</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="painel-grande">
+
+    <h1>Cadastro de Colaboradores</h1>
+
+    <form action="/cadastrar_colaborador" method="POST">
+        <input name="matricula" placeholder="Matrícula" required>
+        <input name="nome" placeholder="Nome" required>
+        <input name="setor" placeholder="Setor" required>
+        <input name="cargo" placeholder="Cargo" required>
+        <button type="submit">Cadastrar Colaborador</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Matrícula</th>
+            <th>Nome</th>
+            <th>Setor</th>
+            <th>Cargo</th>
+            <th>Status</th>
+        </tr>
+
+        {% for c in colaboradores %}
+        <tr>
+            <td>{{ c.matricula }}</td>
+            <td>{{ c.nome }}</td>
+            <td>{{ c.setor }}</td>
+            <td>{{ c.cargo }}</td>
+            <td>{{ "Ativo" if c.ativo else "Inativo" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/admin">Voltar</a>
+
+</div>
+
+</body>
+</html>

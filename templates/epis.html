@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de EPI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="painel-grande">
+
+    <h1>Cadastro de EPI</h1>
+
+    <form action="/cadastrar_epi" method="POST">
+        <input name="codigo" placeholder="Código" required>
+        <input name="descricao" placeholder="Descrição" required>
+        <input name="categoria" placeholder="Categoria" required>
+        <input name="unidade" placeholder="Unidade" required>
+        <button type="submit">Cadastrar EPI</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Unidade</th>
+            <th>Status</th>
+        </tr>
+
+        {% for epi in epis %}
+        <tr>
+            <td>{{ epi.codigo }}</td>
+            <td>{{ epi.descricao }}</td>
+            <td>{{ epi.categoria }}</td>
+            <td>{{ epi.unidade }}</td>
+            <td>{{ "Ativo" if epi.ativo else "Inativo" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/admin">Voltar</a>
+
+</div>
+
+</body>
+</html>

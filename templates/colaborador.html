@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Área do Colaborador</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="painel">
+
+    <h1>Pedido de EPI</h1>
+
+    <form action="/pedido_epi" method="POST">
+
+        <input 
+            type="text" 
+            name="nome" 
+            placeholder="Nome do colaborador" 
+            required
+        >
+
+        <input 
+            type="text" 
+            name="matricula" 
+            placeholder="Matrícula" 
+            required
+        >
+
+        <select name="tipo_item" id="tipo_item" required onchange="verificarOutroItem()">
+            <option value="">Selecione o item</option>
+            <option value="Blusa">Blusa</option>
+            <option value="Calça">Calça</option>
+            <option value="Bota">Bota</option>
+            <option value="Luva">Luva</option>
+            <option value="Avental">Avental</option>
+            <option value="Óculos">Óculos</option>
+            <option value="Protetor Auricular">Protetor Auricular</option>
+            <option value="Touca">Touca</option>
+            <option value="Máscara">Máscara</option>
+            <option value="Outro">Outro</option>
+        </select>
+
+        <input 
+            type="text" 
+            name="descricao_outro" 
+            id="descricao_outro" 
+            placeholder="Digite o item desejado" 
+            style="display:none;"
+        >
+
+        <select name="tamanho" id="tamanho" required onchange="verificarOutroTamanho()">
+            <option value="">Selecione o tamanho</option>
+            <option value="PP">PP</option>
+            <option value="P">P</option>
+            <option value="M">M</option>
+            <option value="G">G</option>
+            <option value="GG">GG</option>
+            <option value="XG">XG</option>
+            <option value="EXG">EXG</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+            <option value="46">46</option>
+            <option value="Outro">Outro</option>
+        </select>
+
+        <input 
+            type="text" 
+            name="tamanho_outro" 
+            id="tamanho_outro" 
+            placeholder="Digite o tamanho desejado" 
+            style="display:none;"
+        >
+
+        <input 
+            type="number" 
+            name="quantidade" 
+            placeholder="Quantidade" 
+            min="1" 
+            required
+        >
+
+        <button type="submit">Enviar Pedido</button>
+
+    </form>
+
+    <br>
+
+<hr>
+
+<h1>Pedido de Almoxarifado</h1>
+
+<form action="/pedido_almoxarifado" method="POST">
+
+    <input 
+        type="text" 
+        name="nome" 
+        placeholder="Nome do solicitante" 
+        required
+    >
+
+    <input 
+        type="text" 
+        name="matricula" 
+        placeholder="Matrícula" 
+        required
+    >
+
+    <select name="item_almoxarifado" id="item_almoxarifado" required onchange="verificarOutroAlmoxarifado()">
+        <option value="">Selecione o item</option>
+        <option value="Caneta">Caneta</option>
+        <option value="Caderno">Caderno</option>
+        <option value="Prancheta">Prancheta</option>
+        <option value="Papel A4">Papel A4</option>
+        <option value="Grampeador">Grampeador</option>
+        <option value="Etiqueta">Etiqueta</option>
+        <option value="Bobina">Bobina</option>
+        <option value="Saco Plástico">Saco Plástico</option>
+        <option value="Outro">Outro</option>
+    </select>
+
+    <input 
+        type="text" 
+        name="item_outro" 
+        id="item_outro" 
+        placeholder="Digite o item desejado" 
+        style="display:none;"
+    >
+
+    <input 
+        type="number" 
+        name="quantidade" 
+        placeholder="Quantidade" 
+        min="1" 
+        required
+    >
+
+    <textarea 
+        name="observacao" 
+        placeholder="Observação">
+    </textarea>
+
+    <button type="submit">Enviar Pedido de Almoxarifado</button>
+
+</form>
+
+    <a href="/">Voltar</a>
+
+</div>
+
+<script>
+function verificarOutroItem() {
+    const item = document.getElementById("tipo_item").value;
+    const campoOutro = document.getElementById("descricao_outro");
+
+    if (item === "Outro") {
+        campoOutro.style.display = "block";
+        campoOutro.required = true;
+    } else {
+        campoOutro.style.display = "none";
+        campoOutro.required = false;
+        campoOutro.value = "";
+    }
+}
+
+function verificarOutroTamanho() {
+    const tamanho = document.getElementById("tamanho").value;
+    const campoOutro = document.getElementById("tamanho_outro");
+
+    if (tamanho === "Outro") {
+        campoOutro.style.display = "block";
+        campoOutro.required = true;
+    } else {
+        campoOutro.style.display = "none";
+        campoOutro.required = false;
+        campoOutro.value = "";
+    }
+}
+</script>
+
+function verificarOutroAlmoxarifado() {
+    const item = document.getElementById("item_almoxarifado").value;
+    const campoOutro = document.getElementById("item_outro");
+
+    if (item === "Outro") {
+        campoOutro.style.display = "block";
+        campoOutro.required = true;
+    } else {
+        campoOutro.style.display = "none";
+        campoOutro.required = false;
+        campoOutro.value = "";
+    }
+}
+
+</body>
+</html>

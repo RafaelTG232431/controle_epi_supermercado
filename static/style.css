@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    height: 100vh;
+}
+
+.card, .painel {
+    background-color: white;
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 40px auto;
+}
+
+.painel-grande {
+    background-color: white;
+    padding: 30px;
+    width: 90%;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 80px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1f7a3f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn-bloquear {
+    background-color: #b3261e;
+}
+
+.liberado {
+    color: green;
+    font-weight: bold;
+}
+
+.bloqueado {
+    color: red;
+    font-weight: bold;
+}
+
+.cards-dashboard {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.mini-card {
+    background-color: #f4f6f8;
+    padding: 20px;
+    width: 160px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.mini-card strong {
+    font-size: 28px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+}
+
+th {
+    background-color: #1f7a3f;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f4f6f8;
+}
+
+hr {
+    margin: 30px 0;
+}

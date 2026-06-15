@@ -1,0 +1,31 @@
+<h1>Pedidos de EPI</h1>
+
+<table>
+    <tr>
+        <th>Data</th>
+        <th>Nome</th>
+        <th>Matrícula</th>
+        <th>Item</th>
+        <th>Tamanho</th>
+        <th>Quantidade</th>
+        <th>Status</th>
+        <th>Ação</th>
+    </tr>
+
+    {% for p in pedidos_epi %}
+    <tr>
+        <td>{{ p.data.strftime("%d/%m/%Y %H:%M") }}</td>
+        <td>{{ p.nome }}</td>
+        <td>{{ p.matricula }}</td>
+        <td>{{ p.descricao_item }}</td>
+        <td>{{ p.tamanho }}</td>
+        <td>{{ p.quantidade }}</td>
+        <td>{{ p.status }}</td>
+        <td>
+            <a href="/alterar_status_epi/{{ p.id }}/Aprovado">Aprovar</a> |
+            <a href="/alterar_status_epi/{{ p.id }}/Separado">Separar</a> |
+            <a href="/alterar_status_epi/{{ p.id }}/Entregue">Entregar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
