@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from io import BytesIO
 from database import db
 from models import ControleAcesso, Colaborador, EPI, PedidoEPI, PedidoAlmoxarifado
 from config import obter_banco
@@ -399,47 +400,38 @@ def exportar_excel():
     if not session.get("admin"):
         return redirect(url_for("login"))
 
-    if not os.path.exists("relatorios"):
-        os.makedirs("relatorios")
-
-    arquivo = "relatorios/relatorio_pedidos.xlsx"
-
     planilha = Workbook()
 
     aba = planilha.active
     aba.title = "Pedidos EPI"
+
     aba.append([
         "Data",
-        "Matrícula",
         "Nome",
-        "Setor",
-        "Código EPI",
-        "Descrição",
-        "Categoria",
-        "Unidade",
+        "Matrícula",
+        "Item",
+        "Tamanho",
         "Quantidade",
         "Status"
     ])
 
-    for pedido in PedidoEPI.query.all():
+    for pedido in PedidoEPI.query.order_by(PedidoEPI.data.desc()).all():
         aba.append([
             pedido.data.strftime("%d/%m/%Y %H:%M"),
-            pedido.matricula,
             pedido.nome,
-            pedido.setor,
-            pedido.codigo_epi,
-            pedido.descricao_epi,
-            pedido.categoria,
-            pedido.unidade,
+            pedido.matricula,
+            pedido.descricao_item,
+            pedido.tamanho,
             pedido.quantidade,
             pedido.status
         ])
 
     aba2 = planilha.create_sheet("Pedidos Almoxarifado")
+
     aba2.append([
         "Data",
-        "Matrícula",
         "Solicitante",
+        "Matrícula",
         "Setor",
         "Item",
         "Quantidade",
@@ -447,11 +439,11 @@ def exportar_excel():
         "Status"
     ])
 
-    for pedido in PedidoAlmoxarifado.query.all():
+    for pedido in PedidoAlmoxarifado.query.order_by(PedidoAlmoxarifado.data.desc()).all():
         aba2.append([
             pedido.data.strftime("%d/%m/%Y %H:%M"),
-            pedido.matricula,
             pedido.solicitante,
+            pedido.matricula,
             pedido.setor,
             pedido.item,
             pedido.quantidade,
@@ -459,9 +451,16 @@ def exportar_excel():
             pedido.status
         ])
 
-    planilha.save(arquivo)
+    arquivo_memoria = BytesIO()
+    planilha.save(arquivo_memoria)
+    arquivo_memoria.seek(0)
 
-    return redirect(url_for("admin"))
+    return send_file(
+        arquivo_memoria,
+        as_attachment=True,
+        download_name="relatorio_pedidos_epi.xlsx",
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 with app.app_context():
     iniciar_banco()
