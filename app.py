@@ -463,6 +463,8 @@ def exportar_excel():
 
     return redirect(url_for("admin"))
 
+with app.app_context():
+    iniciar_banco()
 
 @app.route("/sair")
 def sair():
@@ -471,5 +473,4 @@ def sair():
 
 
 if __name__ == "__main__":
-    iniciar_banco()
     app.run(debug=True)
